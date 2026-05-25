@@ -1,0 +1,51 @@
+# ── macOS ────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Editor / IDE ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*~
+
+# ── LaTeX build artefacts ─────────────────────────────────────────────────────
+# These are produced by xelatex / biber and can always be regenerated.
+report/*.aux
+report/*.bbl
+report/*.bcf
+report/*.blg
+report/*.fdb_latexmk
+report/*.fls
+report/*.listing
+report/*.log
+report/*.lol
+report/*.out
+report/*.run.xml
+report/*.synctex.gz
+report/*.synctex(busy)
+report/*.toc
+report/*-blx.bib
+report/*.bib
+
+# Compiled PDF — comment out the next line if you want to track the PDF
+report/main.pdf
+
+# Stale artefacts left at the root from before the report/ subfolder existed
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.listing
+*.log
+*.lol
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*-blx.bib
+main.pdf
+
+.claude
