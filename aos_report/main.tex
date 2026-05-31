@@ -41,7 +41,7 @@
 \begin{tabular}{lll}
 Last and first name & Person code & Email address\\
 \hline
-Berta Alice      & XXXXXXXX & \texttt{alice.berta@mail.polimi.it} \\
+Berta Alice      & 10889590 & \texttt{alice.berta@mail.polimi.it} \\
 Danese Francesco & 10856896 & \texttt{francesco.danese@mail.polimi.it} \\
 \end{tabular}
 \end{center}
@@ -53,8 +53,7 @@ Danese Francesco & 10856896 & \texttt{francesco.danese@mail.polimi.it} \\
   sessions, and the LED extension.
 
 \item
-  \textbf{Source code:} [\todo[inline]{Insert repository URL when available}
-  REPO URL (not yet publicly available)]
+  \textbf{Source code:} \url{https://github.com/fradane/RTEMS-x-Versal}
 
 \end{itemize}
 
@@ -94,6 +93,8 @@ existed in the RTEMS codebase, almost no practical documentation was available
 covering the full toolchain setup from scratch.
 A secondary motivation for the project was therefore to document the process
 clearly enough to be reproducible by others.
+The complete and detailed guide is available at the project's GitHub repository
+(\url{https://github.com/fradane/RTEMS-x-Versal}).
 
 \subsection*{Why is it important for the AOS course?}
 
@@ -123,8 +124,7 @@ course:
         access a memory-mapped peripheral.
         Diagnosing and fixing this required understanding how the Cortex-R5F MPU
         works, how RTEMS configures it at startup, and how to patch the BSP
-        to add the missing region descriptor, all skills squarely within
-        the scope of OS-level systems programming.
+        to add the missing region descriptor.
 
   \item \textbf{Cross-compilation and toolchain management.}
         Building the RTEMS Source Builder, cross-compiling the kernel and an
@@ -185,7 +185,7 @@ The register is accessed as a volatile memory-mapped pointer, and a data
 synchronisation barrier (\texttt{dsb sy}) is issued after each write to
 guarantee the store reaches the peripheral.
 Both applications are available in the project repository
-[\todo[inline]{Insert repository URL}].
+(\url{https://github.com/fradane/RTEMS-x-Versal}).
 
 
 % ---------------------------------------------------------------------------
@@ -213,9 +213,8 @@ Both applications are available in the project repository
         \texttt{arm/versal\_rpu} BSP and added to
         \texttt{bsps/arm/versal\_rpu/start/bspstart.c}.
         Without this patch, any RTEMS application that accesses a peripheral
-        outside the pre-configured MPU regions triggers an immediate fault.
-        This fix has been documented and may be useful for upstream submission.
-        [\todo[inline]{Add link to patch / commit if submitted upstream}]
+        outside the pre-configured MPU regions triggers an immediate fault, 
+        like in the case of the blinking led.
 
   \item \textbf{Validated bare-metal dual-core communication framework.}
         As a stepping stone to verifying RTEMS execution, a bare-metal
@@ -225,14 +224,12 @@ Both applications are available in the project repository
         inter-core coherency without disabling the data cache entirely.
 
   \item \textbf{Documentation.}
-        A full technical report (separate from this template document) describes
+        A full technical report (separate from this document) describes
         both a step-by-step reproduction guide and a narrative of the
         development process with all relevant debugging findings.
         A potential further step is contributing this guide to the official
         RTEMS documentation, given the near-complete absence of practical
-        material covering this toolchain setup from scratch.
-        Whether this makes sense as an upstream contribution and how to proceed
-        is an open question to be assessed with members of the RTEMS community.
+        material covering this toolchain setup from scratch for the Versal family.
 \end{itemize}
 
 
@@ -261,12 +258,6 @@ Both applications are available in the project repository
         placing code and data sections at specific physical addresses, defining
         memory regions for the RPU address space, and diagnosing subtle link
         errors that arise when regions overlap or are sized incorrectly.
-
-  \item \textbf{Open questions.}
-        One question that remained unanswered was whether the BSP MPU patch is
-        the canonical approach expected by the RTEMS community or whether there
-        is a higher-level API (e.g.\ a BSP configuration option) to declare
-        additional peripheral regions without modifying BSP source directly.
 \end{itemize}
 
 
@@ -313,8 +304,8 @@ Since we had no way to distinguish a UART driver failure from a complete boot
 failure, we devised a side-channel verification: an RTEMS task wrote a sentinel
 value to a shared DDR address, while a bare-metal application on RPU\,1 polled
 that address and printed a confirmation when it changed.
-This confirmed that RTEMS was actually running; the problem was isolated to
-the console driver.
+This should have confirmed that RTEMS was actually running, but the RTOS seemed completely 
+stuck: no visible writes to the shared address.
 Low-level XSDB debugging (reading the program counter and UART registers
 directly from the host debugger) revealed that RTEMS was spinning inside the
 UART0 initialisation routine, waiting for the transmit FIFO to drain.
