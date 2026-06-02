@@ -53,7 +53,7 @@ Danese Francesco & 10856896 & \texttt{francesco.danese@mail.polimi.it} \\
   sessions, and the LED extension.
 
 \item
-  \textbf{Source code:} \url{https://github.com/fradane/RTEMS-x-Versal}
+  \textbf{Source code and report:} \hypertarget{github}{\url{https://github.com/fradane/RTEMS-x-Versal}}
 
 \end{itemize}
 
@@ -79,7 +79,7 @@ Starting from that baseline, we set two progressive goals:
 
 \begin{enumerate}
   \item \textbf{Boot RTEMS on the RPU in split mode} and produce serial output,
-        confirming that the RTOS is fully initialised and its scheduler is
+        confirming that the RTOS is fully initialised and is
         running.
   \item \textbf{Drive a user LED connected to the Programmable Logic (PL)}
         fabric from an RTEMS application, demonstrating that custom PL
@@ -93,8 +93,7 @@ existed in the RTEMS codebase, almost no practical documentation was available
 covering the full toolchain setup from scratch.
 A secondary motivation for the project was therefore to document the process
 clearly enough to be reproducible by others.
-The complete and detailed guide is available at the project's GitHub repository
-(\url{https://github.com/fradane/RTEMS-x-Versal}).
+The complete and detailed guide is available at the project's GitHub repository~\hyperlink{github}{[1]}.
 
 \subsection*{Why is it important for the AOS course?}
 
@@ -184,8 +183,7 @@ Editor (\texttt{0x80000000}) to toggle the LED on and off.
 The register is accessed as a volatile memory-mapped pointer, and a data
 synchronisation barrier (\texttt{dsb sy}) is issued after each write to
 guarantee the store reaches the peripheral.
-Both applications are available in the project repository
-(\url{https://github.com/fradane/RTEMS-x-Versal}).
+Both applications are available in the project repository~\hyperlink{github}{[1]}.
 
 
 % ---------------------------------------------------------------------------
